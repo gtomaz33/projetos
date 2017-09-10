@@ -1,5 +1,32 @@
-stage 'Checkout'
- node('slave') {
-  deleteDir()
-  checkout scm
- }
+#!/usr/bin/env groovy
+node('master'){
+		
+try{
+	
+	stage('build'){
+
+		checkout scm 
+
+		sh "composer install"
+	}
+
+	stage('test'){
+
+		sh ""
+	}	
+	stage('deploy'){
+	//ansible-playbook -i ./ansible/hosts ./ansible/deploy.yml
+	sh "echo 'Deploy realizado com sucesso'"
+
+	}
+
+}catch(error){
+	throw error
+
+}finally{
+	
+
+}
+
+
+}
